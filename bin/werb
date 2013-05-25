@@ -1,0 +1,49 @@
+#! /usr/bin/env ruby
+# -*- coding: utf-8 -*-
+require 'rubygems'
+require 'rack'
+require 'optparse'
+require File.dirname(__FILE__) + '/../lib/werb'
+
+options = {
+  :Port        => 3000,
+  :Host        => "0.0.0.0",
+  :docroot     => "public"
+}
+
+ARGV.clone.options do |opts|
+  opts.on("-p", "--port=port", Integer, "Werb running on specified port.", "Default: 3000") { |v| options[:Port] = v }
+  opts.on("-h", "--host=ip", String, "Werb running on specified ip.", "Default: 0.0.0.0") { |v| options[:Host] = v }
+  opts.on("-r", "--document_root=path", String, "Werb running on specified path(relative from WERB_ROOT).", "Default: public") { |v| options[:docroot] = v }
+
+  opts.separator ""
+
+  opts.on("-h", "--help", "Show this help.") { puts opts; exit }
+
+  opts.parse!
+end
+
+puts "=> Werb #{Werb::VERSION} application starting on http://#{options[:Host]}:#{options[:Port]}"
+
+
+WERB_ROOT = `pwd`.chomp
+WERB_DOCUMENT_ROOT = Pathname.new(File.join(WERB_ROOT, options[:docroot])).cleanpath.to_s
+#server = Rack::Handler.get(ARGV.first) rescue Rack::Handler::WEBrick
+server = Rack::Handler::WEBrick
+
+puts "Werb starting..."
+puts "server : #{server.name.split("::").last}"
+puts "WERB_ROOT : #{WERB_ROOT}"
+puts "WERB_DOCUMENT_ROOT : #{WERB_DOCUMENT_ROOT}"
+
+
+trap(:INT) { exit }
+
+puts "=> Ctrl-C to shutdown server"
+
+
+begin
+  server.run Werb.app, options.merge(:AccessLog => [])
+ensure
+  puts "Bye!"
+end

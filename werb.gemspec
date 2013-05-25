@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "werb"
   gem.require_paths = ["lib"]
   gem.version       = Werb::VERSION
+
+  gem.add_dependency 'rack', '~> 1.0.0'
 end

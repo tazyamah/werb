@@ -1,5 +1,11 @@
-require "werb/version"
+# -*- coding: utf-8 -*-
+require "#{File.dirname(__FILE__)}/werb/version"
+require "#{File.dirname(__FILE__)}/werb/core"
 
 module Werb
-  # Your code goes here...
+  class << self
+    def app
+      Werb::Core.new
+    end
+  end
 end

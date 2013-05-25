@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'thor'
+gem 'rack'
 
 # Specify your gem's dependencies in werb.gemspec
 gemspec

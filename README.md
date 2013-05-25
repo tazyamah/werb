@@ -6,18 +6,26 @@ simple ruby web framework(likes naked php).
 
 Add this line to your application's Gemfile:
 
-    gem 'werb'
+    gem 'werb', :git => 'git@github.com:tazyamah/werb.git'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
     $ gem install werb
 
 ## Usage
+To start werb server:
 
+    $ werb
+
+or:
+
+    $ bundle exec werb
+
+<!--
 To start developing:
 
     $ werb init
@@ -30,6 +38,7 @@ Files and Directories `werb init` creating:
       # put your erb(s)
     Gemfile
     config.rb # web configuaration files.
+-->
 
 ### Routing
 
