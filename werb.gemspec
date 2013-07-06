@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = Werb::VERSION
 
   gem.add_dependency 'rack', '~> 1.0.0'
+  gem.add_dependency 'mime-types', '=1.23'
 end
