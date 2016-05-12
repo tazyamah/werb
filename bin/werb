@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'rack'
 require 'optparse'
+require 'pathname'
 require File.dirname(__FILE__) + '/../lib/werb'
 
 options = {
